@@ -41,3 +41,6 @@ sudo rpm -e filename.rpm  -- To remove installed rpm package
 /usr/bin/sqlplus
 
 curl -u 'USER' https://api.github.com/user/repos -d '{"name":"REPO"}'
+
+----------added by Madhav
+curl -u 'USER' https://api.github.com/user/repos -d '{"name":"REPO"}'
