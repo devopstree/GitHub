@@ -1,0 +1,196 @@
+Linux Commands:
+---------------
+
+1. Editors in Linux:
+  ------------------
+  Vi
+  Vim
+  gedit
+  nano
+
+2. Vi editor commands:
+  --------------------
+  i --> insert
+  a --> append
+  esc :wq! --> saving a file
+  esc :q!  --> exit from file
+  esc dd   --> Delete entire line
+  esc yy   --> Copy entire line
+  esc p    --> Paster the line
+  esc :1, $d --> Clears all data from the editor
+
+3. Clear screen:
+  --------------
+  ctrl-l  --> Clears the screen
+  clear   --> Clears the screen
+
+4. Display the contents of file:
+  ------------------------------
+  cat filename  --> displays the contents of the file
+
+5. Copy file:
+  -----------
+  cp sourcefile destfile  --> copies the sourcefile from sourcepath to destination path
+
+6. move file:
+  -----------
+  mv sourcefile destfilepath  --> moves the sourcefile from sourcepath to destination path
+  
+7. rm file:
+  ----------
+  rm -rf /*  --> Dangerous command. Removes everything from the root path  
+  rm filename  --> removes specified file
+  rm *.txt  --> removes all .txt files from the directory
+  
+8. Search command:
+  ----------------
+  find   --> to find the file in the directory
+  grep   --> to find specific data in the file (generalized regular expression)
+  egrep  --> same as grep
+  
+  grep -i devops  --> case insensitive
+  grep devops     --> case sensitive
+  
+9. Installation commands:
+  -----------------------
+  yum  -->  yum install nginx
+  apt  -->  apt install jenkins
+  when permissions are denied then we need to use sudo permissions
+  
+         sudo yum install git
+         sudo apt install jenkins
+
+10. Download commands:
+  ---------------------
+  wget path ;  When permissions are denied use --> sudo wget path
+  curl path ;  When permissions are denied use --> sudo curl path
+  
+11. Giving permissions to files:
+  ------------------------------
+    chmod  :  Used to provide permissions to the files
+	
+	File permissions will be defined at 3 levels:
+	i.) User  ii.) Group  iii.) Others
+	    ---        ---          ---
+        rwx        rwx 		    rwx
+		
+		Individual Permission values:
+		-----------------------------
+		Read    --> 4
+		Write   --> 2
+		Execute --> 1
+		
+    eg: $chmod 600 sample.txt
+	    sample.txt :- Users have Read, Write
+                      Group have no permission
+                      Others have no permission		
+    To provide all permissions(rwx) to all(users, groups, others):
+	  $chmod 777 sample.txt
+	  
+	To provide execute permission to all
+      $chmod +x sample.txt
+    
+    By default when a file is created in AMI linux it will have 664 permission.
+	  User (rw), Group (rw), Others (r)
+	Otherthan AMI linux default file permissions will be = 644
+      User (rw), Group (r), Others (r)
+	  
+	.pem file will have 400 (read only) permission
+	
+	Default permissions for directories : 775 (rwx - rwx - r_x)
+	
+	umask Value : This is the value which is used to define or set the default permissions.
+	              This value exists in vi /etc/profile
+				  Default umask value in AMI linux = 002
+    
+    $chmod 700 sample.txt : When permission is denied then ; $sudo chmod 700 sample.txt
+	
+12. Creating Softlink and Hardlink:
+   --------------------------------
+   ln -s sourcefile softlinefile  -->  For creating Softlink
+   ln sourcefile hardlinkfile     -->  For creating Hardlink
+   
+   eg: ln -s sample.txt softsample.txt   --> Creates Softlink
+       ln sample.txt hardsample.txt      --> Creates Hardlink
+	   
+   inode : 
+   -------
+   inode value is a number which will be created whenever we create a new file or directory.
+     
+	 ls -lia  --> To view the inode value
+   
+   Softlink will have different inode values with the sourcefile.
+   Hardline will have the same inode value with the sourcefile.
+   
+   Differences between softlink and hardlink:
+   ------------------------------------------
+   Softlink: (Softlink acts as a Pointer)
+   ---------
+     --> Can cross the filesystem ie; Softlink can work between filesystems.
+	 --> allows to link between directories.
+	 --> has different inode number and file permissions than original file.
+	 --> Permissions will not be updated. If source file permission is changed then softlink file     
+	     permissions will not change.
+	 --> has only the path to the original file, not the contents
+	 --> If Sourcefile is deleted then softlink will be pointing to NULL (Dangling Pointer)
+   
+   Hardlink:
+   ---------
+     --> Can't cross the file system boundaries
+     --> Can't link between directories
+     --> has the same inode number and permissions of original file
+     --> Permissions will be updated if we change the permissions of the source file.
+     --> has the contents of the original file, so you can view the contents of the file even when the   
+	     sourcefile is deleted.
+		 
+13. Creating zero size file in linux:
+    ---------------------------------
+    i.) cat>filename
+       eg: $cat > sample.txt
+    ii.) touch filename
+       eg: $touch sample.txt
+
+14. #!/bin/bash --> Hashbang, shebang
+    These are used in order to set the runtime environment for the file.
+    #!/bin/bash on the first line, meaning that the script should always be run with bash, rather than another shell.
+	
+15. To know about the services (Start, Stop, restart, Status)	
+
+    Two commands are used : Service, Systemctl
+	i.) Service : $service service_name status
+	         eg : $service jenkins status  --> To know the status of Jenkins
+			      $service jenkins start   --> To start Jenkins service
+				  $service jenkins stop    --> To stop the service
+		
+        To start the jenkins service at boot up you can run
+            $sudo chkconfig jenkins on
+    ii.) systemctl : $systemctl status service_name
+             eg : $systemctl start jenkins
+
+16. Netstat:
+    --------
+    Netstat is a command line utility that can be used to list out all the network (socket) connections on a system. It lists out all the tcp, udp socket connections and the unix socket connections. Apart from connected sockets it can also list listening sockets that are waiting for incoming connections.
+
+    $netstat -a         -->	Lists out all connections
+	$netstat -at        --> Lists all tcp connections
+    $netstat -au        --> Lists all udp connections
+	$netstat -l         --> Lists all listening ports
+	$netstat -ln        --> Lists all listening networking ports
+	$netstat -ln | grep 80 --> Lists out all the listening network ports with 80
+	
+17. Special Variables:
+    ------------------ 
+    
+	$? --> The return code of the last executed program
+    $# --> The number of arguments supplied to a script
+    $* --> Displays the arguments
+	$$ --> Displays the Process ID number or PID of the current shell
+	$0 --> The filename of the current script
+	
+	echo "File Name: $0"
+	echo "First Parameter : $1"
+	echo "Second Parameter : $2"
+	echo "Quoted Values: $@"
+	echo "Quoted Values: $*"
+	echo "Total Number of Parameters : $#"
+	
