@@ -1,0 +1,46 @@
+Jenkins Logins:
+---------------
+username : martin
+password : Mahima@1503
+
+
+1. Update the UI instance if its new instance
+  $sudo yum update -y
+2. For install and running Jenkins we need Java (Jdk >= 1.8) installed.
+  $java -version
+  $wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.rpm
+  
+  $sudo yum install -y jdk-8u141-linux-x64.rpm
+  Now verify java version one more time
+  $java -version
+3. Now install jenkins
+4. Update the yum package management tool.
+  $sudo yum update -y
+5. Download the latest jenkins code package
+  $sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
+6.import a key file from Jenkins-CI to enable installation from the package.
+  $sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+7. Install jenkins
+  $sudo yum install jenkins -y
+8. Start jenkins as a service
+  $sudo service jenkins start
+9. To start the jenkins service at boot up you can run
+  $sudo chkconfig jenkins on
+10. Access your jenkins url
+  http://yourserverip:8080/  
+  
+  
+For Installing Sql*PLus:
+------------------------  
+$wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+$wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-sqlplus-19.6.0.0.0-1.x86_64.rpm
+
+sudo rpm -ivh oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm
+sudo rpm -ivh oracle-instantclient19.6-sqlplus-19.6.0.0.0-1.x86_64.rpm
+
+sudo rpm -e filename.rpm  -- To remove installed rpm package
+
+/usr/lib/oracle/19.6/client64/
+/usr/bin/sqlplus
+
+curl -u 'USER' https://api.github.com/user/repos -d '{"name":"REPO"}'
