@@ -3,6 +3,8 @@ Jenkins Logins:
 username : martin
 password : Mahima@1503
 
+Installation Steps:
+-------------------
 
 1. Update the UI instance if its new instance
   $sudo yum update -y
