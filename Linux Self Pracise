@@ -1,0 +1,129 @@
+While loop Examples
+https://linuxhint.com/bash-while-loop-examples/
+https://linuxhint.com/30_bash_script_examples/
+https://www.rapidtables.com/code/linux/ls.html
+
+Syntax of while loop:
+while [ condition ]
+do
+    commands
+done
+
+n=1
+while [ $n -le 5 ]
+do
+       echo "Running $n time"
+       (( n++ ))
+done
+
+#!/bin/bash
+valid=true
+count=1
+while [ $valid ]
+do
+echo $count
+if [ $count -eq 5 ];
+then
+break
+fi
+((count++))
+done
+----------
+#! /bin/bash
+valid=true
+count=1
+echo "Numbers"
+while [ $valid ]
+do
+#echo "Numbers"
+echo $count
+if [ $count -eq 5 ]
+then
+break
+fi
+((count++))
+done
+-------------
+n=1
+while [ $n -le 10 ]
+do
+    if [ $n == 6 ]
+    then
+           echo "terminated"
+           break
+     fi
+     echo "Position: $n"
+     (( n++ ))
+done
+
+
+Linux 
+https://www.youtube.com/watch?v=Elfk18EGrJs
+
+User names and UID are stored in /etc/passwd
+
+$ is user prompt
+# is root prompt
+
+go to root 
+sudo su -
+sudo -i 
+now we r in root
+useradd madhav 
+passwd *******
+
+if u want give the permissions for the user same like root then u need to open the file "visudo"
+
+when we create User group also will create and groups availble under /etc/group
+root user has administartive account and some times called super user 
+root has complete control over the system
+whoami
+users
+id 
+groups
+last --> who all r loged in my system 
+who --> currently loged in system
+history --> it will give all history what command has been executed details
+max filename length is 255 characters
+
+ls or ll both are same 
+
+cat > file1.txt (it will allow to write some thing in the file.. if u want save the file and come out then ctrl+c )
+
+head --> it will display first 10 lines
+tail --> it will display last 10 lines
+
+ls -a it will display hidden files
+ls -R  --> recoursive of all sub directories
+
+how to create multiple dirs at same time 
+mkdir dir1 dir2 dir 3 
+
+how to create multiple files at same time 
+touch file1 file2 file 3
+
+abdolute path (absolute path start with "/"
+cd /home/ece-user/dir1
+
+relavant path (for relavant path we will not give any "/"
+
+cd dir1 
+
+df -h (file systems)
+du -k (disk utilization)
+
+create tar file on the directory (tar is useful to zip the directory) 
+tar -cvf test.tar test
+
+if u delete test directory even though test.tar will be availble 
+
+to restore deleted dir use below command
+
+tar -xvf test.tar
+
+sort will use for to sort the data 
+for numbers 
+sort -n file
+usermod -m (to change the user permissions)
+
+sudo usermode -aG ec2-user madhav 
