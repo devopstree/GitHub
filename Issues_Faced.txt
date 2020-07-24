@@ -1,0 +1,21 @@
+If we want to select one java version among java versions installed:
+--------------------------------------------------------------------
+sudo update-alternatives --config java
+
+Swap file space issue:
+----------------------
+
+This needs to be done for every new session
+
+free -m
+sudo fallocate -l 1G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+Build step failed with exception:
+---------------------------------
+
+Undeploy all the existing projects and try
+eg., petclinic3 exists then undeploy
+     petclinic2 exists then undeploy
