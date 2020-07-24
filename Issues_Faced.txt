@@ -3,9 +3,10 @@ If we want to select one java version among java versions installed:
 sudo update-alternatives --config java
 
 Swap file space issue:
+There is insufficient memory for the Java Runtime Environment to continue.
 ----------------------
 
-Below are the commands to execute and this needs to be done for every new session:
+This needs to be done for every new session
 
 free -m
 sudo fallocate -l 1G /swapfile
